@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import { useState } from "react";
 
 import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
@@ -6,7 +7,7 @@ import { createOrder } from "../../services/apiRestaurant";
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
-    str
+    str,
   );
 
 const fakeCart = [
@@ -65,12 +66,18 @@ function CreateOrder() {
         <div>
           <label>Address</label>
           <div>
-            <input type="text" name="address" required />
+            <input
+              className="w-full rounded-full border border-stone-200 px-4 py-2 text-sm transition-all duration-300 focus:outline-none focus:ring focus:ring-yellow-400 sm:py-3 md:px-6 "
+              type="text"
+              name="address"
+              required
+            />
           </div>
         </div>
 
         <div>
           <input
+            className="h-6 w-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
             type="checkbox"
             name="priority"
             id="priority"
@@ -82,7 +89,10 @@ function CreateOrder() {
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <button disabled={isSubmitting}>
+          <button
+            disabled={isSubmitting}
+            className="inline-block rounded-full bg-yellow-400 px-4 py-3 font-semibold uppercase tracking-wide text-stone-800 transition-colors duration-300 hover:bg-yellow-300 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2 disabled:cursor-not-allowed"
+          >
             {isSubmitting ? "Placing Order" : "Order now"}
           </button>
         </div>
@@ -92,6 +102,7 @@ function CreateOrder() {
 }
 
 export async function action({ request }) {
+  // getting data from form
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   console.log(data);
@@ -110,9 +121,10 @@ export async function action({ request }) {
   if (Object.keys(errors).length > 0) return errors;
 
   // If everything is okey, create new order and redirect
-  const NewOrder = await createOrder(order);
+  // const NewOrder = await createOrder(order);
 
-  return redirect(`/order/${NewOrder.id}`);
+  // return redirect(`/order/${NewOrder.id}`);
+  return null;
 }
 
 export default CreateOrder;
