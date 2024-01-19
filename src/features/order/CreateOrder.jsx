@@ -85,7 +85,7 @@ function CreateOrder() {
 
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
-          <Button disabled={isSubmitting}>
+          <Button disabled={isSubmitting} type="primary">
             {isSubmitting ? "Placing Order" : "Order now"}
           </Button>
         </div>
@@ -114,10 +114,9 @@ export async function action({ request }) {
   if (Object.keys(errors).length > 0) return errors;
 
   // If everything is okey, create new order and redirect
-  // const NewOrder = await createOrder(order);
+  const NewOrder = await createOrder(order);
 
-  // return redirect(`/order/${NewOrder.id}`);
-  return null;
+  return redirect(`/order/${NewOrder.id}`);
 }
 
 export default CreateOrder;
