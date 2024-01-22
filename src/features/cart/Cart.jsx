@@ -6,12 +6,12 @@ import { clearCart, getCart, getUser } from "./cartSlice";
 import EmptyCart from "./EmptyCart";
 
 function Cart() {
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
   const cart = useSelector(getCart);
   const username = useSelector(getUser);
-
+  console.log(cart);
   function handleClearCart() {
-    return disptach(clearCart());
+    return dispatch(clearCart());
   }
 
   if (!cart.length) return <EmptyCart />;
@@ -35,8 +35,6 @@ function Cart() {
         <Button type="secondary" onClick={handleClearCart}>
           Clear Cart
         </Button>
-
-        <button>Clear cart</button>
       </div>
     </div>
   );
